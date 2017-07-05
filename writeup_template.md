@@ -1,7 +1,5 @@
 # Self Driving Car Engineer Nanodegree Project 2
-## Traffic Sign Recognition** 
----
-
+## Traffic Sign Recognition
 The goals / steps of this project are the following:
 * Load the data set (see below for links to the project data set)
 * Explore, summarize and visualize the data set
@@ -21,13 +19,13 @@ The goals / steps of this project are the following:
 [image6]: ./downloadedgermansigns/StopSign.jpg "Stop Sign"
 [image7]: ./downloadedgermansigns/PriorityRoad.jpg "Priority Road"
 [image8]: ./downloadedgermansigns/stopSign4.jpg "Stop Sign 4"
-[image9]: ./visualizations/TrainingData.jpg "Training Data"
-[image10]: ./visualizations/ValidationData.jpg "Validation Data"
-[image11]: ./visualizations/TestData.jpg "Test Data"
-[image12]: ./visualizations/ProcessedData.jpg "Processed Data"
-[image13]: ./visualizations/AugmentedData.jpg "Augmented Data"
-[image14]: ./visualizations/top5probsearly.jpg "Early Probabilities"
-[image14]: ./visualizations/top5probs.jpg "Probabilities"
+[image9]: ./visualizations/TrainingData.png "Training Data"
+[image10]: ./visualizations/ValidationData.png "Validation Data"
+[image11]: ./visualizations/TestData.png "Test Data"
+[image12]: ./visualizations/ProcessedData.png "Processed Data"
+[image13]: ./visualizations/AugmentedData.png "Augmented Data"
+[image14]: ./visualizations/top5probsearly.png "Early Probabilities"
+[image14]: ./visualizations/top5probs.png "Probabilities"
 
 ## Rubric Points
 Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/481/view) individually and describe how I addressed each point in my implementation.  
@@ -45,7 +43,7 @@ signs data set:
 * The number of unique classes/labels in the data set is 43
 
 
-## 2. An exploratory visualization of the dataset.
+## 2. An exploratory visualization of the dataset
 
 Here is an exploratory visualization of the data set. The following bar chart is a histogram of the training data set showing how many images there are of each type.
 
@@ -110,8 +108,7 @@ My final model consisted of the following layers:
 | RELU 					| 	        									|	
 | Dropout				| 0.6        									|
 | Fully connected		| input 84  output 43	 			        	|
-| Softmax				| 		       									|
-|						|												|
+| Softmax				| Output		       							|
 															
 
 ### Model Training Describe how you trained your model. The discussion can include the type of optimizer, the batch size, number of epochs and any hyperparameters such as learning rate.
@@ -130,10 +127,8 @@ A lot of research has already been done on this data set with some researchers a
 
  
 
-###Test a Model on New Images
-
-####1. I searched for and found 7 images of German traffic signs on the web. The seven images are shown below.
-
+## 4. Test a Model on New Images
+I searched for and found 7 images of German traffic signs on the web. The seven images are shown below.
 
 ![alt text][image1] ![alt text][image2] ![alt text][image3] 
 ![alt text][image4] ![alt text][image5] ![alt text][image6]
@@ -141,7 +136,8 @@ A lot of research has already been done on this data set with some researchers a
 
 The first image might be difficult to classify because ...
 
-####2. Discuss the model's predictions on these new traffic signs and compare the results to predicting on the test set. At a minimum, discuss what the predictions were, the accuracy on these new predictions, and compare the accuracy to the accuracy on the test set (OPTIONAL: Discuss the results in more detail as described in the "Stand Out Suggestions" part of the rubric).
+## 5. Predictions on New Images
+Discuss the model's predictions on these new traffic signs and compare the results to predicting on the test set. At a minimum, discuss what the predictions were, the accuracy on these new predictions, and compare the accuracy to the accuracy on the test set (OPTIONAL: Discuss the results in more detail as described in the "Stand Out Suggestions" part of the rubric).
 
 Here are the results of the prediction:
 
@@ -154,9 +150,10 @@ Here are the results of the prediction:
 | Slippery Road			| Slippery Road      							|
 
 
-The model was able to correctly guess 4 of the 5 traffic signs, which gives an accuracy of 80%. This compares favorably to the accuracy on the test set of ...
+The model was able to correctly guess 6 of the original 7 traffic signs, which gives an accuracy of 86%. This compares favorably to the accuracy on the test set.
 
-####3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)
+## 6. Describe how certain the model is when predicting on each of the new images.
+The Softmax probabilities for each prediction. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)
 
 The code for making predictions on my final model is located in the 11th cell of the Ipython notebook.
 
