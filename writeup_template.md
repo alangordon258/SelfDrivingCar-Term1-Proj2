@@ -1,5 +1,5 @@
-# Self Driving Car Engineer Nanodegree Project 2: Traffic Sign Recognition** 
-
+# Self Driving Car Engineer Nanodegree Project 2
+## Traffic Sign Recognition** 
 ---
 
 The goals / steps of this project are the following:
@@ -35,7 +35,6 @@ Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/4
 Here is a link to my [project code](https://github.com/udacity/CarND-Traffic-Sign-Classifier-Project/blob/master/Traffic_Sign_Classifier.ipynb) . As you can see I achieved an accuracy of 97% on the test data set and 87.5% (7/8) on an additional 8 images that I found on the Internet.
 
 ## 1. Data Set Summary & Exploration
----
 I used the numpy and pandas libraries to calculate summary statistics of the traffic
 signs data set:
 
@@ -46,8 +45,7 @@ signs data set:
 * The number of unique classes/labels in the data set is 43
 
 
-### 2. An exploratory visualization of the dataset.
----
+## 2. An exploratory visualization of the dataset.
 
 Here is an exploratory visualization of the data set. The following bar chart is a histogram of the training data set showing how many images there are of each type.
 
@@ -61,15 +59,17 @@ The following bar chart is a histogram of the test data sset
 
 ![alt text][image11]
 
-### Design and Test a Model Architecture
+The charts show that although some sign types have more representation in the data sets than others. The training, test, and validation data sets are similar.
 
-#### 1. I preprocessed the images as follows: 
-(1) Convert to grayscale. Accuracy was a 2 or 3 percent higher with grayscale and ran faster also because there is only a single channel. I assume the acuracy was higher because shape and other factors were more distinct than color between the sign types and eliminating color allowed the network to focus on these other factors. 
-(2) Improve the contract by calling equalizeHist 
-(3) Normalized the images using (x-avg)/stddev
+## 3. Design and Test a Model Architecture
+
+#### I preprocessed the images as follows: 
+1. Convert to grayscale. Accuracy was a 2 or 3 percent higher with grayscale and ran faster also because there is only a single channel. I assume the acuracy was higher because shape and other factors were more distinct than color between the sign types and eliminating color allowed the network to focus on these other factors. 
+2. Improve the contract by calling equalizeHist 
+3. Normalized the images using (x-avg)/stddev
 Example before and after images are shown below.
 
-![alt text][image2]
+![alt text][image12]
 
 From reading a few research papers of people who had attacked the same problem such as [this](http://yann.lecun.com/exdb/publis/pdf/sermanet-ijcnn-11.pdf) it was clear that one of the techniques for improving accuracy was to increase the size of the training set by perturbing the available samples with small, random changes of translation, rotation and scale. The Keras library includes a method called ImageDataGenerator that can be used for this purpose. I called the method with the following parameters. These values were arrive at largely by trial and error. 
 
@@ -85,12 +85,12 @@ ImageDataGenerator(
 
 Here is an example of an original image and an augmented image:
 
-![alt text][image3]
+![alt text][image13]
 
 This data augmentation was used to double the size of the training set from 34799 to 69598
 
 
-####2. Describe what your final model architecture looks like including model type, layers, layer sizes, connectivity, etc.) Consider including a diagram and/or table describing the final model.
+### Describe what your final model architecture looks like including model type, layers, layer sizes, connectivity, etc.) Consider including a diagram and/or table describing the final model.
 
 My final model consisted of the following layers:
 
@@ -114,7 +114,7 @@ My final model consisted of the following layers:
 |						|												|
 															
 
-####3. Model Training Describe how you trained your model. The discussion can include the type of optimizer, the batch size, number of epochs and any hyperparameters such as learning rate.
+### Model Training Describe how you trained your model. The discussion can include the type of optimizer, the batch size, number of epochs and any hyperparameters such as learning rate.
 
 To train the model, I used the Adam Optimzer in Tensor Flow with a learning rate of 0.0004. My batch size was 128 and I used 100 epochs. I largely arrived at these values via an iterative approach. I eventually achieved an accuracy of 0.971. I essentially stuck with the basic Lenet architecture. I played around a little bit with an architecture where outputs from earlier, convolutional layers were fed forward into the fully-connected layers. But I was not able to see an imrpovement with this approach. 
 
