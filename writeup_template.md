@@ -158,6 +158,7 @@ When I added this image to the dataset is was recognized  immediately. However, 
 ## 6. Describe how certain the model is when predicting on each of the new images.
 My model was very certain of its results with the exception of the stop sign described above. The Softmax probabilities for all of the images with the exception of the stop sign image described above was very near 1.0 (about 0.99) for the selected sign type with all of the other probabilities near zero. See the image below.
 ![alt text][image15]
+
 For the problematic stop sign image, the top five soft max probabilities were as follows:
 
 | Probability         	|     Prediction	        					| 
