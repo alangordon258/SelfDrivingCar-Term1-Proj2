@@ -1,8 +1,6 @@
-#Self Driving Car Engineer Nanodegree Project 2: Traffic Sign Recognition** 
+# Self Driving Car Engineer Nanodegree Project 2: Traffic Sign Recognition** 
 
 ---
-
-=======
 
 The goals / steps of this project are the following:
 * Load the data set (see below for links to the project data set)
@@ -23,13 +21,20 @@ The goals / steps of this project are the following:
 [image6]: ./downloadedgermansigns/StopSign.jpg "Stop Sign"
 [image7]: ./downloadedgermansigns/PriorityRoad.jpg "Priority Road"
 [image8]: ./downloadedgermansigns/stopSign4.jpg "Stop Sign 4"
+[image9]: ./visualizations/TrainingData.jpg "Training Data"
+[image10]: ./visualizations/ValidationData.jpg "Validation Data"
+[image11]: ./visualizations/TestData.jpg "Test Data"
+[image12]: ./visualizations/ProcessedData.jpg "Processed Data"
+[image13]: ./visualizations/AugmentedData.jpg "Augmented Data"
+[image14]: ./visualizations/top5probsearly.jpg "Early Probabilities"
+[image14]: ./visualizations/top5probs.jpg "Probabilities"
 
 ## Rubric Points
-###Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/481/view) individually and describe how I addressed each point in my implementation.  
+Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/481/view) individually and describe how I addressed each point in my implementation.  
 
 Here is a link to my [project code](https://github.com/udacity/CarND-Traffic-Sign-Classifier-Project/blob/master/Traffic_Sign_Classifier.ipynb) . As you can see I achieved an accuracy of 97% on the test data set and 87.5% (7/8) on an additional 8 images that I found on the Internet.
 
-##1.Data Set Summary & Exploration
+## 1. Data Set Summary & Exploration
 ---
 I used the numpy and pandas libraries to calculate summary statistics of the traffic
 signs data set:
@@ -41,16 +46,24 @@ signs data set:
 * The number of unique classes/labels in the data set is 43
 
 
-###2. An exploratory visualization of the dataset.
+### 2. An exploratory visualization of the dataset.
 ---
 
-Here is an exploratory visualization of the data set. It is a bar chart showing how the data ...
+Here is an exploratory visualization of the data set. The following bar chart is a histogram of the training data set showing how many images there are of each type.
 
-![alt text][image1]
+![alt text][image9]
 
-###Design and Test a Model Architecture
+The following bar chart is a histogram of the validation data sset
 
-####1. I preprocessed the images as follows: 
+![alt text][image10]
+
+The following bar chart is a histogram of the test data sset
+
+![alt text][image11]
+
+### Design and Test a Model Architecture
+
+#### 1. I preprocessed the images as follows: 
 (1) Convert to grayscale. Accuracy was a 2 or 3 percent higher with grayscale and ran faster also because there is only a single channel. I assume the acuracy was higher because shape and other factors were more distinct than color between the sign types and eliminating color allowed the network to focus on these other factors. 
 (2) Improve the contract by calling equalizeHist 
 (3) Normalized the images using (x-avg)/stddev
@@ -99,9 +112,7 @@ My final model consisted of the following layers:
 | Fully connected		| input 84  output 43	 			        	|
 | Softmax				| 		       									|
 |						|												|
-|						|												|
- 
-
+															
 
 ####3. Model Training Describe how you trained your model. The discussion can include the type of optimizer, the batch size, number of epochs and any hyperparameters such as learning rate.
 
