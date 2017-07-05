@@ -20,13 +20,13 @@ The goals / steps of this project are the following:
 [image6]: ./downloadedgermansigns/StopSign.jpg "Stop Sign"
 [image7]: ./downloadedgermansigns/PriorityRoad.jpg "Priority Road"
 [image8]: ./downloadedgermansigns/StopSign4.jpg "Stop Sign 4"
-[image9]: ./visualizations/TrainingData.png "Training Data"
-[image10]: ./visualizations/ValidationData.png "Validation Data"
-[image11]: ./visualizations/TestData.png "Test Data"
-[image12]: ./visualizations/ProcessedData.png "Processed Data"
-[image13]: ./visualizations/AugmentedData.png "Augmented Data"
-[image14]: ./visualizations/top5probsearly.png "Early Probabilities"
-[image15]: ./visualizations/top5probs.png "Probabilities"
+[image9]: ./visualizations/TrainingData.jpg "Training Data"
+[image10]: ./visualizations/ValidationData.jpg "Validation Data"
+[image11]: ./visualizations/TestData.jpg "Test Data"
+[image12]: ./visualizations/ProcessedData.jpg "Processed Data"
+[image13]: ./visualizations/AugmentedData.jpg "Augmented Data"
+[image14]: ./visualizations/top5probsearly.jpg "Early Probabilities"
+[image15]: ./visualizations/top5probs.jpg "Probabilities"
 
 ## Rubric Points
 Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/481/view) individually and describe how I addressed each point in my implementation.  
