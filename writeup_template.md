@@ -25,12 +25,12 @@ The goals / steps of this project are the following:
 [image12]: ./visualizations/ProcessedData.png "Processed Data"
 [image13]: ./visualizations/AugmentedData.png "Augmented Data"
 [image14]: ./visualizations/top5probsearly.png "Early Probabilities"
-[image14]: ./visualizations/top5probs.png "Probabilities"
+[image15]: ./visualizations/top5probs.png "Probabilities"
 
 ## Rubric Points
 Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/481/view) individually and describe how I addressed each point in my implementation.  
 
-Here is a link to my [project code](https://github.com/udacity/CarND-Traffic-Sign-Classifier-Project/blob/master/Traffic_Sign_Classifier.ipynb) . As you can see I achieved an accuracy of 97% on the test data set and 87.5% (7/8) on an additional 8 images that I found on the Internet.
+Here is a link to my [project code](https://github.com/alangordon258/SelfDrivingCar-Term1-Proj2/blob/master/Traffic_Sign_Classifier.ipynb) . As you can see I achieved an accuracy of 97% on the test data set and 87.5% (7/8) on an additional 8 images that I found on the Internet.
 
 ## 1. Data Set Summary & Exploration
 I used the numpy and pandas libraries to calculate summary statistics of the traffic
@@ -46,17 +46,11 @@ signs data set:
 ## 2. An exploratory visualization of the dataset
 
 Here is an exploratory visualization of the data set. The following bar chart is a histogram of the training data set showing how many images there are of each type.
-
 ![alt text][image9]
-
 The following bar chart is a histogram of the validation data sset
-
 ![alt text][image10]
-
 The following bar chart is a histogram of the test data sset
-
 ![alt text][image11]
-
 The charts show that although some sign types have more representation in the data sets than others. The training, test, and validation data sets are similar.
 
 ## 3. Design and Test a Model Architecture
@@ -71,11 +65,11 @@ Example before and after images are shown below.
 
 From reading a few research papers of people who had attacked the same problem such as [this](http://yann.lecun.com/exdb/publis/pdf/sermanet-ijcnn-11.pdf) it was clear that one of the techniques for improving accuracy was to increase the size of the training set by perturbing the available samples with small, random changes of translation, rotation and scale. The Keras library includes a method called ImageDataGenerator that can be used for this purpose. I called the method with the following parameters. These values were arrive at largely by trial and error. 
 
-ImageDataGenerator(
-        rotation_range=18,
+datagen = ImageDataGenerator(
+        rotation_range=15,
         width_shift_range=0.1,
         height_shift_range=0.1,
-        shear_range=0.25,
+        shear_range=0.2,
         zoom_range=0.2,
         horizontal_flip=False,
         dim_ordering='tf',
@@ -119,9 +113,9 @@ Initially, I was seeing an accuracy of approx 90% with the Lenet architecture as
 
 
 My final model results were:
-* training set accuracy of 99.1%
-* validation set accuracy of 98.5% 
-* test set accuracy of 97.1%
+* training set accuracy of 99.9%
+* validation set accuracy of 98.8% 
+* test set accuracy of 96.9%
 
 A lot of research has already been done on this data set with some researchers achieving accuracies above 99% which actually exceeds human recognition accuracy of 98.81%. See [here](http://benchmark.ini.rub.de/?section=gtsrb&subsection=results#3). Yann Lec=Cun himself achieved accuracy of 99.17% as part of the GTSRB competition [here](http://yann.lecun.com/exdb/publis/pdf/sermanet-ijcnn-11.pdf). Hence I did not see any reason to change the basic architecture as it had been shown to be very accurate at solving this particular problem. The only thing I felt was necessary was to do  some tuning of the number of weights in the convolution layer, which I found from experimentation to have a strong effect and tuning some of the other parameters such as the learning rate and keep probability for the dropout. I did notice that in manner of the architectures used the researchers who got the best results, the output of the 1st convolutional layer is fed directly to the classifier (the fully-connected layers) as higher-resolution features. I decided to leave an investigation of this until the end and I did not have enough time to explore it in depth, but this will be a subject of future investigation for me. The results as to the efficacy of this architecture speak for themselves. I achieved 97% accuracy on the test data and 87.5% on (admittedly flawed) images that were pulled off the Internet.
 
@@ -132,45 +126,48 @@ I searched for and found 7 images of German traffic signs on the web. The seven 
 
 ![alt text][image1] ![alt text][image2] ![alt text][image3] 
 ![alt text][image4] ![alt text][image5] ![alt text][image6]
-![alt text][image7]
+![alt text][image7] ![alt text][image8]
 
-The first image might be difficult to classify because ...
 
 ## 5. Predictions on New Images
-Discuss the model's predictions on these new traffic signs and compare the results to predicting on the test set. At a minimum, discuss what the predictions were, the accuracy on these new predictions, and compare the accuracy to the accuracy on the test set (OPTIONAL: Discuss the results in more detail as described in the "Stand Out Suggestions" part of the rubric).
+The model was able to correctly guess 8 of 8 traffic signs, which gives an accuracy of 100%. This compares favorably to the accuracy on the test set.
 
-Here are the results of the prediction:
+Here are the initial results of the prediction:
 
-| Image			        |     Prediction	        					| 
-|:---------------------:|:---------------------------------------------:| 
-| Stop Sign      		| Stop sign   									| 
-| U-turn     			| U-turn 										|
-| Yield					| Yield											|
-| 100 km/h	      		| Bumpy Road					 				|
-| Slippery Road			| Slippery Road      							|
+| Image			        	|     Prediction	        					| 
+|:-------------------------:|:---------------------------------------------:| 
+| Stop Sign      			| Stop sign 	 								| 
+| Stop Sign   				| Stop Sign 									|
+| Bumpy road   				| Bumpy road 									|
+| Right of way intersection	| Right of way intersection						|
+| Speed limit 50 km/h		| Speed limit 50 km/h  			 				|
+| Turn right ahead			| Turn right ahead      						|
+| Priority road 			| Priority Road  	     						|
+| General caution			| General General       						|
 
-
-The model was able to correctly guess 6 of the original 7 traffic signs, which gives an accuracy of 86%. This compares favorably to the accuracy on the test set.
+You may wonder why there are two stop sign images in my data. This is because at first one of the stop signs was being recognized incorrectly as Priority Road. I looked at the stop sign image and noticed that it was shot at an angle that created a keystoneing effect that altered the perceived shape of the image. See below.
+![alt text][image7]
+I suspect that the neural network has learned the shapes of the signs and in this image because of the distortion, it does not match the shape of a stop sign. To confirm this I decided to find a second stop sign image that didn't have this. This image is shown below.
+![alt text][image8]
+When I added this image to the dataset is was recognized  immediately. However, as I continued to train my neural network and make improvements, particularly when I increased the number of epochs from 40 to 80, I noticed that my classifier actually started to recognize the first stop sign correctly albeit with a lower confidence than the other images.
 
 ## 6. Describe how certain the model is when predicting on each of the new images.
-The Softmax probabilities for each prediction. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)
+My model was very certain of its results with the exception of the stop sign described above. The Softmax probabilities for all of the images with the exception of the stop sign image described above was very near 1.0 (about 0.99) for the selected sign type with all of the other probabilities near zero. See the image below.
 
-The code for making predictions on my final model is located in the 11th cell of the Ipython notebook.
+![alt text][image15]
 
-For the first image, the model is relatively sure that this is a stop sign (probability of 0.6), and the image does contain a stop sign. The top five soft max probabilities were
+For the problematic stop sign image, the top five soft max probabilities were as follows:
 
 | Probability         	|     Prediction	        					| 
 |:---------------------:|:---------------------------------------------:| 
-| .60         			| Stop sign   									| 
-| .20     				| U-turn 										|
-| .05					| Yield											|
-| .04	      			| Bumpy Road					 				|
-| .01				    | Slippery Road      							|
+| .73         			| Stop sign   									| 
+| .24     				| Priority Road									|
+| .02					| Speed Limit 100 km/h							|
+| .01	      			| Speed Limit 120 km/h					 		|
+| .00				    | Keep Right      								|
+
+The HTML output from my Ipython notebook showing my results can be found [here](https://github.com/alangordon258/SelfDrivingCar-Term1-Proj2/blob/master/Traffic_Sign_Classifier.html). When I tried viewing it on github.com it was complaining that it was too large, I can email this file if necessary. My code can be found [here](https://github.com/alangordon258/SelfDrivingCar-Term1-Proj2/blob/master/Traffic_Sign_Classifier.ipynb) This was a fun and challenging assignment. I wish I had more time to spend on it.
 
 
-For the second image ... 
-
-### (Optional) Visualizing the Neural Network (See Step 4 of the Ipython notebook for more details)
-####1. Discuss the visual output of your trained network's feature maps. What characteristics did the neural network use to make classifications?
 
 
