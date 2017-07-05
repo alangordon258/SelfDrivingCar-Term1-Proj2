@@ -146,7 +146,7 @@ Here are the initial results of the prediction:
 | General caution			| General General       						|
 
 You may wonder why there are two stop sign images in my data. This is because at first, one of the stop signs was being recognized incorrectly as Priority Road. I looked at the stop sign image and noticed that it was shot at an angle that created a keystoneing effect that altered the perceived shape of the image. See below.
-![alt text][image7]
+![alt text][image6]
 I suspect that the neural network has learned the shapes of the signs and in this image because of the distortion, it does not match the shape of a stop sign. To confirm this I decided to find a second stop sign image that didn't have this. This image is shown below.
 ![alt text][image8]
 When I added this image to the dataset is was recognized  immediately. However, as I continued to train my neural network and make improvements, particularly when I increased the number of epochs from 40 to 80, I noticed that my classifier actually started to recognize the first stop sign correctly albeit with a lower confidence than the other images.
