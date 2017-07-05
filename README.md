@@ -31,7 +31,7 @@ The goals / steps of this project are the following:
 ## Rubric Points
 Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/481/view) individually and describe how I addressed each point in my implementation.  
 
-Here is a link to my [project code](https://github.com/alangordon258/SelfDrivingCar-Term1-Proj2/blob/master/Traffic_Sign_Classifier.ipynb) . As you can see I achieved an accuracy of 97% on the test data set and 87.5% (7/8) on an additional 8 images that I found on the Internet.
+Here is a link to my [project code](https://github.com/alangordon258/SelfDrivingCar-Term1-Proj2/blob/master/Traffic_Sign_Classifier.ipynb) . As you can see I achieved an accuracy of 96.9% on the test data set and 100% (8/8) on an additional 8 images that I found on the Internet.
 
 ## 1. Data Set Summary & Exploration
 I used the numpy and pandas libraries to calculate summary statistics of the traffic
