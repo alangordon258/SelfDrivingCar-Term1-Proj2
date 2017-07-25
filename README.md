@@ -34,12 +34,11 @@ Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/4
 Here is a link to my [project code](https://github.com/alangordon258/SelfDrivingCar-Term1-Proj2/blob/master/Traffic_Sign_Classifier.ipynb) . As you can see I achieved an accuracy of 96.9% on the test data set and 100% (8/8) on an additional 8 images that I found on the Internet.
 
 ## 1. Data Set Summary & Exploration
-I used the numpy and pandas libraries to calculate summary statistics of the traffic
-signs data set:
+I used the numpy and pandas libraries to calculate summary statistics of the traffic signs data set:
 
-* The size of training set is 34799
+* The size of the training set is 34799
 * The size of the validation set is 4410
-* The size of test set is 12630
+* The size of the test set is 12630
 * The shape of a traffic sign image is (32,32,3)
 * The number of unique classes/labels in the data set is 43
 
@@ -48,19 +47,21 @@ signs data set:
 
 Here is an exploratory visualization of the data set. The following bar chart is a histogram of the training data set showing how many images there are of each type.
 ![alt text][image9]
-The following bar chart is a histogram of the validation data sset
+The following bar chart is a histogram of the validation data set
 ![alt text][image10]
-The following bar chart is a histogram of the test data sset
+The following bar chart is a histogram of the test data set
 ![alt text][image11]
-The charts show that although some sign types have more representation in the data sets than others. The training, test, and validation data sets are similar.
+The charts show that although some sign types have more representation in the data sets than others, the training, test, and validation data sets have similar distributions.
 
 ## 3. Design and Test a Model Architecture
 
-#### I preprocessed the images as follows: 
+#### Data Preprocessing
+I preprocessed the images as follows: 
 1. Convert to grayscale. Accuracy was a 2 or 3 percent higher with grayscale and ran faster also because there is only a single channel. I assume the acuracy was higher because shape and other factors were more distinct than color between the sign types and eliminating color allowed the network to focus on these other factors. 
 2. Improve the contrast of the images using the OpenCV equalizeHist method.
 3. Normalized the images using (x-avg)/stddev.
-Example before and after images are shown below.
+
+Some example before and after images are shown below.
 
 ![alt text][image12]
 
@@ -83,8 +84,7 @@ Here is an example of an original image and an augmented image:
 This data augmentation was used to double the size of the training set from 34799 to 69598
 
 
-### Describe what your final model architecture looks like including model type, layers, layer sizes, connectivity, etc.) Consider including a diagram and/or table describing the final model.
-
+### Neural Network Architecture 
 My final model consisted of the following layers:
 
 | Layer         		|     Description	        					| 
@@ -106,8 +106,7 @@ My final model consisted of the following layers:
 | Softmax				| Output		       							|
 															
 
-### Model Training Describe how you trained your model. The discussion can include the type of optimizer, the batch size, number of epochs and any hyperparameters such as learning rate.
-
+### Model Training 
 To train the model, I used the Adam Optimzer in Tensor Flow with a learning rate of 0.0005. My batch size was 128 and I used 80 epochs. I largely arrived at these values via an iterative approach. I eventually achieved an accuracy of 0.969. I essentially stuck with the basic Lenet architecture. I played around a little bit with an architecture where outputs from earlier, convolutional layers were fed forward into the fully-connected layers. But I was not able to see an imrpovement with this approach. 
 
 Initially, I was seeing an accuracy of approx 90% with the Lenet architecture as it was created in our lectures. Early on I did see that increasing the number of features in the convolutional layer had a significant positive effect. This was particularly true before I converted the images to grayscale. This makes sense as the additional features are needed to capture the additional complexity of the traffic sign images relative to the character dataset that was used previously. After increasing the number of weights, augmenting the dataset and adding dropout had the next largest effects. Again, this makes sense because as I added additional weights I started to see a problem with overfitting begin to manifest itself. The training accuracy was high, but the validation numbers were coming in lower. When I added the dropout this improved. I tried a view runs with different values for the dropout starting at 0.5. 0.6 improved the final validation accuracy and 0.7 was better than 0.5 but not as good as 0.6, so I settled on 0.6. I next started varying the learning rate and number of epochs. I found that I reached a point of diminishing returns around 100 epoches and the best learning rate seemed to be between .0004 and .0005. I eventually settled on a value of 0.0005 for the learning rate with 80 epochs. This yielded an accuracy on the test set of 96.9%. I also tried both increasing and decreasing the batch size to 64 and 256 from 128, but neither offered an improvement.
@@ -118,7 +117,7 @@ My final model results were:
 * validation set accuracy of 98.8% 
 * test set accuracy of 96.9%
 
-A lot of research has already been done on this data set with some researchers achieving accuracies above 99% which actually exceeds human recognition accuracy of 98.81%. See [here](http://benchmark.ini.rub.de/?section=gtsrb&subsection=results#3). Yann Lec=Cun himself achieved accuracy of 99.17% as part of the GTSRB competition [here](http://yann.lecun.com/exdb/publis/pdf/sermanet-ijcnn-11.pdf). Hence I did not see any reason to change the basic architecture as it had been shown to be very accurate at solving this particular problem. The only thing I felt was necessary was to do  some tuning of the number of weights in the convolution layer, which I found from experimentation to have a strong effect and tuning some of the other parameters such as the learning rate and keep probability for the dropout. I did notice that in manner of the architectures used by the researchers who got the best results, the output of the 1st convolutional layer is fed directly to the classifier (the fully-connected layers) as higher-resolution features. I decided to leave an investigation of this until the end. Unfortunately, I did not have enough time to explore this architecture in depth, but this will be a subject of future investigation for me. The results as to the efficacy of this architecture speak for themselves. I achieved 97% accuracy on the test data and 100% images that were pulled off the Internet.
+A lot of research has already been done on this data set with some researchers achieving accuracies above 99% which actually exceeds human recognition accuracy of 98.81%. See [here](http://benchmark.ini.rub.de/?section=gtsrb&subsection=results#3). Yann LecCun himself achieved accuracy of 99.17% as part of the GTSRB competition [here](http://yann.lecun.com/exdb/publis/pdf/sermanet-ijcnn-11.pdf). Hence I did not see any reason to change the basic architecture as it had been shown to be very accurate at solving this particular problem. The only thing I felt was necessary was to do  some tuning of the number of weights in the convolution layer, which I found from experimentation to have a strong effect and tuning some of the other parameters such as the learning rate and keep probability for the dropout. I did notice that in manner of the architectures used by the researchers who got the best results, the output of the 1st convolutional layer is fed directly to the classifier (the fully-connected layers) as higher-resolution features. I decided to leave an investigation of this until the end. Unfortunately, I did not have enough time to explore this architecture in depth, but this will be a subject of future investigation for me. The results as to the efficacy of this architecture speak for themselves. I achieved 97% accuracy on the test data and 100% images that were pulled off the Internet.
 
  
 
